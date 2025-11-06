@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thika College of Excellence - Student Verification</title>
+  <style>
+    :root{
+      --blue: #0b66ff;
+      --light-blue: #e8f0ff;
+      --dark: #0b1520;
+      --muted: #6b7380;
+      --card-radius: 12px;
+      --gap: 14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#f7f9ff 0%, #ffffff 100%);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:920px;
+      background:white;
+      border-radius:16px;
+      box-shadow:0 6px 30px rgba(10,20,40,0.08);
+      padding:20px;
+    }
+
+    header{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .logo{
+      width:64px;height:64px;border-radius:10px;background:var(--light-blue);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);font-size:18px;
+      flex-shrink:0;
+      border:2px solid rgba(11,102,255,0.12);
+    }
+
+    .title{font-size:18px;font-weight:700}
+    .subtitle{font-size:13px;color:var(--muted);margin-top:4px}
+
+    .search-row{display:flex;gap:10px;align-items:center;margin-bottom:18px}
+    .search{flex:1;display:flex;gap:8px}
+    input[type="text"]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid #edf1f7;font-size:15px}
+    button{padding:10px 14px;border-radius:10px;border:none;background:var(--blue);color:white;font-weight:600;cursor:pointer}
+    button.ghost{background:transparent;color:var(--blue);border:1px solid rgba(11,102,255,0.08)}
+
+    .result-area{display:grid;grid-template-columns: 220px 1fr;gap:18px;align-items:start}
+    .card{border-radius:12px;padding:14px;background:linear-gradient(180deg, #ffffff, #fbfdff);border:1px solid rgba(11,102,255,0.04)}
+
+    .photo{width:100%;height:0;padding-bottom:120%;border-radius:8px;background:#f2f5ff;background-size:cover;background-position:center;border:1px solid #e6ecff}
+
+    .info h2{margin:0 0 6px 0;font-size:20px}
+    .info .meta{color:var(--muted);margin-bottom:8px}
+    .badge{display:inline-block;padding:6px 8px;border-radius:999px;font-weight:700;font-size:12px}
+    .active{background:#e8f9f1;color:#036b3a}
+    .graduated{background:#fff6e6;color:#b36b00}
+    .suspended{background:#ffecef;color:#a30000}
+
+    .field{display:flex;justify-content:space-between;padding:8px 0;border-top:1px dashed #eef3ff}
+    .field:first-of-type{border-top:none}
+
+    .invalid{color:#b00020;background:#fff1f2;padding:12px;border-radius:10px;border:1px solid rgba(176,0,32,0.06)}
+
+    .small{font-size:13px;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:700px){
+      .result-area{grid-template-columns:1fr;}
+      .logo{width:52px;height:52px}
+      .title{font-size:16px}
+    }
+
+    /* scanner modal */
+    .modal{position:fixed;inset:0;background:rgba(2,8,23,0.6);display:none;align-items:center;justify-content:center}
+    .modal.open{display:flex}
+    .modal .panel{width:90%;max-width:520px;background:white;padding:12px;border-radius:12px}
+    .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">TCE</div>
+      <div>
+        <div class="title">Thika College of Excellence – Student Verification</div>
+        <div class="subtitle">Enter an admission ID (e.g. TCE-1248) or scan a student's QR to verify.</div>
+      </div>
+    </header>
+
+    <div class="search-row">
+      <div class="search">
+        <input id="idInput" type="text" placeholder="Enter ID e.g. TCE-1248 or TCE-A1B2C3" inputmode="text" autocomplete="off" />
+        <button id="searchBtn">Verify</button>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button id="scanBtn" class="ghost">Scan QR</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </div>
+
+    <div id="messageArea"></div>
+
+    <div id="result" class="result-area" style="display:none;margin-top:8px">
+      <div class="card" id="leftCard">
+        <div id="photo" class="photo" title="Student photo"></div>
+        <div class="small" style="margin-top:8px">Photo</div>
+      </div>
+      <div class="card" id="rightCard">
+        <div class="info">
+          <h2 id="name">Name</h2>
+          <div class="meta" id="course">Course</div>
+          <div style="margin-top:10px" id="statusWrap"></div>
+        </div>
+
+        <div style="margin-top:10px">
+          <div class="field"><div class="small">ADM No</div><div id="adm" class="small"></div></div>
+          <div class="field"><div class="small">Expiry date</div><div id="expiry" class="small"></div></div>
+          <div class="field"><div class="small">Status</div><div id="statusText" class="small"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="small" style="margin-top:16px;color:var(--muted)">
+      Optional: You can store students.json in the same folder as this file. Records must include: id, name, admNo, course, expiry, status, photo (url or base64). If students.json is missing this page will use a built-in demo list so you can try it immediately.
+    </div>
+  </div>
+
+  <!-- Modal for scanner -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="panel">
+      <div id="reader" style="width:100%"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px">
+        <button id="closeScanner" class="ghost">Close</button>
+      </div>
+      <div class="hint">Allow camera access. Point the camera at a QR code that contains the student's ID or a link with <code>?id=</code>.</div>
+    </div>
+  </div>
+
+  <script>
+    // Demo fallback data used when students.json is not found.
+    const FALLBACK_STUDENTS = [
+      {
+        id: 'TCE-1248',
+        name: 'Michael Lesakale',
+        admNo: '123-456-7890',
+        course: 'Diploma in Electrical and Electronics',
+        expiry: '2027-01-01',
+        status: 'Active',
+        photo: 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect width="100%" height="100%" fill="#e8f0ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#0b66ff" font-family="sans-serif">Michael<br/>Lesakale</text></svg>')
+      },
+      {
+        id: 'TCE-A1B2C3',
+        name: 'Aisha Mwende',
+        admNo: '987-654-3210',
+        course: 'Diploma in ICT',
+        expiry: '2026-07-15',
+        status: 'Graduated',
+        photo: 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect width="100%" height="100%" fill="#f8faff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#0b66ff" font-family="sans-serif">Aisha<br/>Mwende</text></svg>')
+      }
+    ];
+
+    let students = [];
+
+    async function loadStudents() {
+      // Try JSON first
+      try{
+        const res = await fetch('./students.json', {cache: 'no-store'});
+        if (!res.ok) throw new Error('JSON not found');
+        const data = await res.json();
+        students = normalize(data);
+        return;
+      }catch(e){
+        // try CSV
+        try{
+          const res2 = await fetch('./students.csv', {cache: 'no-store'});
+          if (res2.ok){
+            const text = await res2.text();
+            students = parseCSV(text);
+            return;
+          }
+        }catch(e2){}
+      }
+      // fallback
+      students = FALLBACK_STUDENTS;
+    }
+
+    function normalize(list){
+      // ensure keys are lowercase and expected
+      return list.map(item => ({
+        id: item.id || item.ID || (item.admNo ? item.admNo : ''),
+        name: item.name || item.Name || '',
+        admNo: item.admNo || item.ADM || item.ADM_NO || item.adm || '',
+        course: item.course || item.Course || '',
+        expiry: item.expiry || item.Expiry || item.expiry_date || '',
+        status: (item.status || item.Status || 'Active'),
+        photo: item.photo || item.photoUrl || item.photo_url || ''
+      }));
+    }
+
+    function parseCSV(text){
+      // very small CSV parser; expects header row
+      const rows = text.split(/\r?\n/).filter(r=>r.trim());
+      if (rows.length < 1) return [];
+      const headers = rows[0].split(',').map(h=>h.trim());
+      const data = rows.slice(1).map(r=>{
+        const cols = r.split(',');
+        const obj = {};
+        headers.forEach((h,i)=> obj[h.trim()] = (cols[i]||'').trim());
+        return obj;
+      });
+      return normalize(data);
+    }
+
+    function showInvalid(msg){
+      const area = document.getElementById('messageArea');
+      area.innerHTML = `<div class="invalid">${msg}</div>`;
+      document.getElementById('result').style.display = 'none';
+    }
+
+    function showStudent(s){
+      document.getElementById('messageArea').innerHTML = '';
+      document.getElementById('result').style.display = 'grid';
+      document.getElementById('photo').style.backgroundImage = `url('${s.photo||''}')`;
+      document.getElementById('name').innerText = s.name || '-';
+      document.getElementById('course').innerText = s.course || '-';
+      document.getElementById('adm').innerText = s.admNo || (s.id||'-');
+      document.getElementById('expiry').innerText = s.expiry || '-';
+      document.getElementById('statusText').innerText = s.status || '-';
+
+      const wrap = document.getElementById('statusWrap');
+      const st = (s.status||'Active').toLowerCase();
+      let cls='active', txt='Active';
+      if (st.includes('grad')){ cls='graduated'; txt='Graduated' }
+      else if (st.includes('susp')){ cls='suspended'; txt='Suspended' }
+      else { cls='active'; txt='Active' }
+      wrap.innerHTML = `<span class="badge ${cls}">${txt}</span>`;
+    }
+
+    function findById(q){
+      if(!q) return null;
+      q = q.trim();
+      return students.find(s=> (s.id||'').toLowerCase() === q.toLowerCase() || (s.admNo||'').toLowerCase() === q.toLowerCase());
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', ()=>{
+      const q = document.getElementById('idInput').value;
+      const found = findById(q);
+      if(found) showStudent(found); else showInvalid('Invalid or Unregistered ID.');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      document.getElementById('idInput').value='';
+      document.getElementById('messageArea').innerHTML='';
+      document.getElementById('result').style.display='none';
+    });
+
+    // Support ?id= in URL
+    function checkQueryParam(){
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      if(id){
+        document.getElementById('idInput').value = id;
+        const found = findById(id);
+        if(found) showStudent(found); else showInvalid('Invalid or Unregistered ID.');
+      }
+    }
+
+    // Simple QR code scanner integration using html5-qrcode (optional). We only load the script if user opens scanner.
+    let html5QrCode = null;
+    async function openScanner(){
+      const modal = document.getElementById('modal'); modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+      if(!window.Html5Qrcode){
+        // load script dynamically from CDN
+        try{
+          await loadScript('https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js');
+        }catch(e){
+          alert('Failed to load QR scanner. Check network.');
+          return;
+        }
+      }
+
+      const readerId = 'reader';
+      html5QrCode = new Html5Qrcode(readerId);
+      const config = { fps: 10, qrbox: {width:250,height:250} };
+      Html5Qrcode.getCameras().then(cameras=>{
+        const camId = (cameras && cameras.length>0) ? cameras[0].id : null;
+        html5QrCode.start(camId, config, qrCodeMessage=>{
+          // qrCodeMessage may be a full URL or just an ID
+          // if it contains ?id=, parse it
+          let id = qrCodeMessage;
+          try{ const u = new URL(qrCodeMessage); id = new URL(qrCodeMessage).searchParams.get('id') || qrCodeMessage; }catch(e){}
+          // stop and close
+          stopScanner();
+          document.getElementById('idInput').value = id;
+          const found = findById(id);
+          if(found) showStudent(found); else showInvalid('Invalid or Unregistered ID.');
+        }, err => {
+          // ignore scan errors
+        }).catch(err=>{
+          console.error('start error', err);
+        });
+      }).catch(err=>{
+        console.warn('camera list error', err);
+        // try starting without camera id
+        html5QrCode.start({facingMode: 'environment'}, config, qrCodeMessage=>{}, err=>{}).catch(()=>{});
+      });
+    }
+
+    function stopScanner(){
+      const modal = document.getElementById('modal'); modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+      if(html5QrCode){ html5QrCode.stop().then(()=>{ html5QrCode.clear(); html5QrCode=null; }).catch(()=>{html5QrCode=null}); }
+    }
+
+    document.getElementById('scanBtn').addEventListener('click', ()=> openScanner());
+    document.getElementById('closeScanner').addEventListener('click', ()=> stopScanner());
+
+    function loadScript(url){
+      return new Promise((resolve,reject)=>{
+        const s = document.createElement('script'); s.src = url; s.onload = ()=>resolve(); s.onerror = ()=>reject(); document.head.appendChild(s);
+      });
+    }
+
+    // On load
+    (async function(){
+      await loadStudents();
+      checkQueryParam();
+
+      // support enter key
+      document.getElementById('idInput').addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ document.getElementById('searchBtn').click(); } });
+    })();
+  </script>
+</body>
+</html>

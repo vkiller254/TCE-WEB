@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thika College of Excellence — News</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#071032" />
+  <meta name="description" content="Thika College of Excellence — stay updated with the latest campus news, events, and student activities in Thika, Kenya." />
+  <script src="https://kit.fontawesome.com/1f1f55f1e6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- ==============================
+         HEADER
+    ============================== -->
+      <header class="site-header" role="banner">
+      <div class="header-inner container">
+        <!-- BRAND / LOGO -->
+        <div class="brand">
+          <img src="img/logo.png" alt="Thika College Logo" class="logo">
+          <span class="brand-text">Thika College</span>
+        </div>
+        <!-- DESKTOP NAVIGATION -->
+        <nav class="main-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="#home" class="nav-link">Home</a></li>
+           <!--<li><a href="#Abou" class="nav-link">About</a></li>--> 
+            <li><a href="#latest" class="nav-link">News</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-wrap">
+            <input type="search" placeholder="Search..." aria-label="Search" />
+            <button aria-label="Search">
+               <span class="icon" aria-hidden="true">🔍</span>
+            </button>
+          </div>
+        <!-- HEADER ACTIONS -->
+        <div class="header-actions">
+          <!-- Hamburger (mobile only) -->
+          <button class="hamburger" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+      <!-- MOBILE MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" role="navigation">
+        <ul>
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <!--<li><a href="#" class="nav-link">About</a></li>-->
+          <li><a href="#latest" class="nav-link">News</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+    <main>
+      <!-- HERO -->
+      <section id="home" class="hero-section" aria-labelledby="heroTitle">
+        <figure class="hero-figure">
+          <img src="https://via.placeholder.com/1600x900?text=Featured+Story" alt="Campus garden project" class="hero-image" loading="lazy" />
+          <figcaption class="hero-caption">
+            <div class="hero-meta">Featured • Campus Life</div>
+            <h1 id="heroTitle" class="hero-title">Students Launch Sustainable Campus Garden</h1>
+            <p class="hero-excerpt">Transforming unused space into a thriving garden, offering food, learning, and community involvement.</p>
+            <time class="hero-date" datetime="2025-10-18">Oct 18, 2025</time>
+            <div class="hero-cta-row">
+              <a href="#article-1" class="btn btn-primary">Read More</a>
+            </div>
+          </figcaption>
+        </figure>
+      </section>
+      <!-- LATEST NEWS -->
+      <section id="latest" class="section latest-news container" aria-labelledby="latestTitle">
+  <div class="section-header">
+    <h2 id="latestTitle">Latest News</h2>
+    <div class="category-filters" role="tablist" aria-label="Filter news by category">
+      <button class="filter-btn active" data-category="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-category="campus">Campus Life</button>
+      <button class="filter-btn" data-category="announce">Announcements</button>
+      <button class="filter-btn" data-category="tech">Technology</button>
+      <button class="filter-btn" data-category="sports">Sports</button>
+      <button class="filter-btn" data-category="culture">Culture</button>
+    </div>
+  </div>
+
+  <div class="cards-grid" id="newsGrid" aria-live="polite" >
+    <!-- Campus Life -->
+    <article class="card" data-category="campus" id="article-1" aria-labelledby="a1-title">
+      <img src="img/GARDEN.webp" alt="Students planting seeds" class="card-image" loading="lazy" />
+      <div class="card-body">
+        <h3 id="a1-title" class="card-title">Campus Garden Gets Official Opening</h3>
+        <p class="card-excerpt">College leadership and students cut the ribbon on the campus garden built by volunteers and green club members.</p>
+        <div class="card-footer">
+          <time datetime="2025-10-18">Oct 18, 2025</time>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Announcements -->
+    <article class="card" data-category="announce" id="article-2" aria-labelledby="a2-title">
+      <img src="img/Time.png" alt="Announcement image" class="card-image" loading="lazy" />
+      <div class="card-body">
+        <h3 id="a2-title" class="card-title">Semester Timetable Released</h3>
+        <p class="card-excerpt">Administration publishes the semester timetable and exam schedule. Students are advised to check the portal.</p>
+        <div class="card-footer">
+          <time datetime="2025-10-12">Oct 12, 2025</time>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Technology -->
+    <article class="card" data-category="tech" id="article-3" aria-labelledby="a3-title">
+      <img src="img/BOOTCAMP.webp" alt="Tech workshop" class="card-image" loading="lazy" />
+      <div class="card-body">
+        <h3 id="a3-title" class="card-title">Coding Bootcamp Helps New Students</h3>
+        <p class="card-excerpt">A weekend bootcamp introduces newcomers to coding fundamentals, boosting campus employability skills.</p>
+        <div class="card-footer">
+          <time datetime="2025-09-30">Sep 30, 2025</time>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Sports -->
+    <article class="card" data-category="sports" id="article-4" aria-labelledby="a4-title">
+      <img src="img/Football.png" alt="College sports" class="card-image" loading="lazy" />
+      <div class="card-body">
+        <h3 id="a4-title" class="card-title">Inter-College Football Victory</h3>
+        <p class="card-excerpt">The men's team won the regional cup after a thrilling penalty shootout against rivals.</p>
+        <div class="card-footer">
+          <time datetime="2025-09-22">Sep 22, 2025</time>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Culture -->
+    <article class="card" data-category="culture" id="article-5" aria-labelledby="a5-title">
+      <img src="img/Cultural.webp" alt="Cultural day" class="card-image" loading="lazy" />
+      <div class="card-body">
+        <h3 id="a5-title" class="card-title">Annual Cultural Day Highlights</h3>
+        <p class="card-excerpt">Students celebrated diversity with performances, exhibitions, and traditional food tasting.</p>
+        <div class="card-footer">
+          <time datetime="2025-09-15">Sep 15, 2025</time>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+      <!-- GALLERY -->
+      <section id="gallery" class="section gallery container" aria-labelledby="galleryTitle">
+        <div class="section-header">
+          <h2 id="galleryTitle">Campus Gallery</h2>
+          <p class="muted">Photos from recent activities. Replace placeholders with real campus photos.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="https://via.placeholder.com/800x600?text=Photo+1" alt="Students at the garden" loading="lazy" />
+            <figcaption>Green Club planting day</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://via.placeholder.com/800x600?text=Photo+2" alt="Graduation ceremony" loading="lazy" />
+            <figcaption>Graduates 2025</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://via.placeholder.com/800x600?text=Photo+3" alt="Tech workshop" loading="lazy" />
+            <figcaption>Student tech showcase</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://via.placeholder.com/800x600?text=Photo+4" alt="Sports match" loading="lazy" />
+            <figcaption>Football team in action</figcaption>
+          </figure>
+        </div>
+      </section>
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="section contact container" aria-labelledby="contactTitle">
+        <div class="section-header text-center">
+          <h2 id="contactTitle">Contact Us</h2>
+          <p class="muted">Reach out to our administration and student services. We’re here to help!</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Thika College of Excellence</h3>
+            <p class="location"><strong>Address:</strong> Victory Plaza, 2nd Floor, Shop No. 15, Thika</p>
+            <p class="email"><strong>Email:</strong> <a href="mailto:info@thikacollege.edu">info@thikacollege.edu</a></p>
+            <p class="phone"><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></p>
+            <div class="socials">
+              <a href="#" aria-label="Facebook" class="social-icon">Facebook</a>
+              <a href="#" aria-label="Twitter" class="social-icon">Twitter</a>
+              <a href="#" aria-label="Instagram" class="social-icon">Instagram</a>
+            </div>
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d318.27009977219575!2d37.07308626977181!3d-1.0364326691386685!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e1!3m2!1sen!2ske!4v1761138462082!5m2!1sen!2ske"></iframe>
+            </div>
+          </div>
+          <div class="contact-card contact-form-card">
+            <form id="contactForm" class="contact-form" action="#" method="post" novalidate aria-label="Contact form">
+              <div class="form-row">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" required placeholder="John Doe" />
+              </div>
+              <div class="form-row">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" required placeholder="you@example.com" />
+              </div>
+              <div class="form-row">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Write your message here..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="reset" class="btn btn-ghost">Reset</button>
+              </div>
+              <p id="formStatus" class="form-status" aria-live="polite" hidden></p>
+            </form>
+          </div>
+        </div> <!-- closes .contact-grid -->  
+      </section>
+    </main>
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner container">
+        <div class="footer-left footer-brand">
+          <img src="img/logo.png" alt="Thika College logo small" loading="lazy" />
+          <small>© <span id="year"></span> Thika College of Excellence. All rights reserved.</small>
+          <noscript><small>© 2025 Thika College of Excellence</small></noscript>
+        </div>
+        <div class="footer-middle footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <div class="footer-right footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Departments</a>
+        </div>
+      </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
