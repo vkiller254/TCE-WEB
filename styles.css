@@ -787,18 +787,19 @@ button:hover {
   padding: 0 1rem;
 }
 
-.filter-btn {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 30px;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  touch-action: manipulation;
+.filter-buttons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;         /* enables horizontal scrolling */
+  white-space: nowrap;      /* prevents line breaks */
+  padding-bottom: 0.4rem;   /* some spacing for nice scroll feel */
+  scrollbar-width: none;    /* hide scrollbar (Firefox) */
+}
+
+.filter-buttons::-webkit-scrollbar {
+  display: none;            /* hide scrollbar (Chrome, Safari, etc.) */
 }
 
 .filter-btn:hover,
@@ -1631,5 +1632,30 @@ button:hover {
 
   .search-wrap input:focus {
     width: 150px;
+  }
+}
+@media (max-width: 480px) {
+  .hero-caption {
+    padding: 1rem; /* reduced padding on small screens */
+  }
+
+  .hero-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem; /* tighter space */
+  }
+
+  .hero-excerpt {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem; /* reduced space below text */
+    line-height: 1.5;
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    gap: 0.5rem; /* smaller gap between buttons */
+  }
+
+  .hero-cta {
+    padding: 0.65rem 1.4rem; /* slightly smaller buttons */
   }
 }

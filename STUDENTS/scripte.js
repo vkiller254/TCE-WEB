@@ -18,11 +18,12 @@ const students = [
   },
 
   { 
-    admNo: "ADM2025-003", 
-    name: "Cynthia Mumo", 
-    course: "Information Technology", 
+    admNo: "ADM546", 
+    name: "Feisal Ahmed I brahim", 
+    course: "Information and Communications Technology", 
     duration: "3 years", 
-    expiry: "2028-05-10" 
+    expiry: "2028" ,
+    photo:"img/546.jpg"
   },
   { admNo: "ADM2025-004", 
     name: "David Karanja", 
