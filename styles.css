@@ -1659,3 +1659,63 @@ button:hover {
     padding: 0.65rem 1.4rem; /* slightly smaller buttons */
   }
 }
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+/* --- Prevent unwanted side scroll --- */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Reset sizing rules --- */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* --- Universal image scaling --- */
+img, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Contain layout sections --- */
+.container,
+.section,
+.footer-inner,
+.contact-grid,
+.cards-grid,
+.events-grid,
+.gallery-grid {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* --- Allow horizontal scroll only on chosen sections --- */
+.scroll-x {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-x > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Example fix for iPhone SE screens */
+@media (max-width: 375px) {
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.2rem; }
+  p, a, li { font-size: 0.9rem; }
+}
